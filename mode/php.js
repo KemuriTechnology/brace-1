@@ -1873,7 +1873,7 @@ var PhpLangHighlightRules = function() {
         "start" : [
             {
                 token : "text",
-                regex : /:*:/
+                regex : ":[a-zA-Z]*:"
             },
             {
                 token : "comment",
