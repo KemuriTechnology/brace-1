@@ -1872,6 +1872,10 @@ var PhpLangHighlightRules = function() {
     this.$rules = {
         "start" : [
             {
+                token : "text",
+                regex : /:*:/
+            },
+            {
                 token : "comment",
                 regex : /(?:#|\/\/)(?:[^?]|\?[^>])*/
             },
