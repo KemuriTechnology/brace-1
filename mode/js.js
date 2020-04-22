@@ -54,7 +54,7 @@ ace.define("ace/mode/cp_javascript_highlight_rules",["require","exports","module
   var oop = acequire("../lib/oop");
   var DocCommentHighlightRules = acequire("./doc_comment_highlight_rules").DocCommentHighlightRules;
   var TextHighlightRules = acequire("./text_highlight_rules").TextHighlightRules;
-  var identifierRe = "[a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*";
+  var identifierRe = "((?![__A__])([a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*))";
 
   var CpJavaScriptHighlightRules = function(options) {
     var keywordMapper = this.createKeywordMapper({
@@ -97,6 +97,18 @@ ace.define("ace/mode/cp_javascript_highlight_rules",["require","exports","module
       "no_regex" : [
         DocCommentHighlightRules.getStartRule("doc-start"),
         comments("no_regex"),
+        {
+          token : "codepuzzlequestion",
+          regex : /__(?!_)A__/
+        },
+        {
+          token : "codepuzzleoption",
+          regex : "codepuzzleoption_A_((?!_codepuzzleoption).)*_codepuzzleoption"
+        },
+        {
+          token : "codepuzzleauto",
+          regex : "___(?!_)A__"
+        },
         {
           token : "string",
           regex : "'(?=.)",
@@ -235,18 +247,6 @@ ace.define("ace/mode/cp_javascript_highlight_rules",["require","exports","module
       }
       ],
       "start": [
-        {
-          token : "codepuzzlequestion",
-          regex : "__(?!_)[A-Z]__"
-        },
-        {
-          token : "codepuzzleoption",
-          regex : "codepuzzleoption_[A-Z]_((?!_codepuzzleoption).)*_codepuzzleoption"
-        },
-        {
-          token : "codepuzzleauto",
-          regex : "___(?!_)[A-Z]__"
-        },
         DocCommentHighlightRules.getStartRule("doc-start"),
         comments("start"),
         {
@@ -263,7 +263,7 @@ ace.define("ace/mode/cp_javascript_highlight_rules",["require","exports","module
           next: "no_regex"
         },{
           token : "codepuzzlequestion",
-          regex : "__(?!_)A__"
+          regex : /__(?!_)A__/
         },
         {
           token : "codepuzzleoption",
