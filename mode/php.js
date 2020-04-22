@@ -1951,7 +1951,6 @@ var PhpLangHighlightRules = function() {
              
             {
                 token : function(value) {
-                    console.log(value);
                     if(value == '__A__')
                         return "codepuzzlequestion";
                     if (keywords.hasOwnProperty(value))
